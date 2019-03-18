@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import Map from "./components/Map";
 
 class App extends Component {
-  render() {
-    return <h1>Hello React</h1>;
-  }
+    render() {
+        return <Map />;
+    }
 }
 
 export default App;
