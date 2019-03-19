@@ -46,8 +46,8 @@ export default class Map extends Component {
         this.setState({
             viewport: {
                 ...this.state.viewport,
-                width: window.innerWidth,
-                height: window.innerHeight
+                width: window.innerWidth - 10,
+                height: window.innerHeight - 10
             }
         });
     };

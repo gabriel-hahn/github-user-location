@@ -1,10 +1,6 @@
-import React, { Component } from "react";
-import Map from "./components/Map";
+import React from "react";
+import Main from "./pages/main";
 
-class App extends Component {
-    render() {
-        return <Map />;
-    }
-}
+const App = () => <Main />;
 
 export default App;

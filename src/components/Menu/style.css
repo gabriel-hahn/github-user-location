@@ -1,0 +1,21 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+*:focus {
+    outline: none;
+}
+
+.menu {
+    position: absolute;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 60px;
+    margin-left: 50px;
+    height: 650px;
+    width: 300px;
+    box-shadow: 0 6px 6px #afafaf;
+    max-height: 650px;
+    z-index: 9;
+}
