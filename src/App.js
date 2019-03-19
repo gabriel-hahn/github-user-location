@@ -1,13 +1,18 @@
-import React, { Fragment } from 'react';
-import Main from './pages/main';
+import React from 'react';
+import { Provider } from 'react-redux';
+
+import './config/reactotron';
+import store from './store';
+
+import Routes from './routes';
 
 import GlobalStyle from './styles/global';
 
 const App = () => (
-  <Fragment>
+  <Provider store={store}>
     <GlobalStyle />
-    <Main />
-  </Fragment>
+    <Routes />
+  </Provider>
 );
 
 export default App;

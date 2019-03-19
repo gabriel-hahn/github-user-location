@@ -1,12 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 
 import ReactMapGL from 'react-map-gl';
+import Modal from '../Modal';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 const API_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
-export default class Map extends Component {
+class Map extends Component {
   state = {
     viewport: {
       width: 400,
@@ -58,13 +60,23 @@ export default class Map extends Component {
 
   render() {
     return (
-      <ReactMapGL
-        {...this.state.viewport}
-        onClick={this.handleClick}
-        mapStyle="mapbox://styles/mapbox/basic-v9"
-        onViewportChange={viewport => this.setState({ viewport })}
-        mapboxApiAccessToken={API_TOKEN}
-      />
+      <Fragment>
+        {this.props.data.showModal && <Modal />}
+
+        <ReactMapGL
+          {...this.state.viewport}
+          onClick={this.handleClick}
+          mapStyle="mapbox://styles/mapbox/basic-v9"
+          onViewportChange={viewport => this.setState({ viewport })}
+          mapboxApiAccessToken={API_TOKEN}
+        />
+      </Fragment>
     );
   }
 }
+
+const mapStateToProps = state => ({
+  data: state.users,
+});
+
+export default connect(mapStateToProps)(Map);
