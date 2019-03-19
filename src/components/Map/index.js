@@ -52,10 +52,16 @@ export default class Map extends Component {
         });
     };
 
+    handleClick = position => {
+        console.log(position.lngLat);
+    };
+
     render() {
         return (
             <ReactMapGL
                 {...this.state.viewport}
+                onClick={this.handleClick}
+                mapStyle="mapbox://styles/mapbox/basic-v9"
                 onViewportChange={viewport => this.setState({ viewport })}
                 mapboxApiAccessToken={API_TOKEN}
             />
