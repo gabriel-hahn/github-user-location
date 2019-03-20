@@ -65,7 +65,7 @@ class Map extends Component {
   render() {
     return (
       <Fragment>
-        {this.state.userPosition && <Modal />}
+        {this.state.userPosition && <Modal userPosition={this.state.userPosition} />}
 
         <ReactMapGL
           {...this.state.viewport}

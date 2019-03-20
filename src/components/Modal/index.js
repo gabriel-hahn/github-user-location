@@ -11,7 +11,7 @@ class Modal extends Component {
     e.preventDefault();
 
     const input = document.getElementsByTagName('input')[0];
-    this.props.addUser(input.value);
+    this.props.addUser(input.value, this.props.userPosition);
   };
 
   render() {

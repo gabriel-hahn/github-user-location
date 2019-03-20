@@ -18,6 +18,7 @@ const INITIAL_STATE = {
       id: 19672684,
       avatar_url: 'https://avatars2.githubusercontent.com/u/19672684?v=4',
       name: 'Gabriel Hahn Schaeffer',
+      position: [-49.4060152740815, -28.699290962725723],
     },
   ],
 };
@@ -44,9 +45,9 @@ export default function users(state = INITIAL_STATE, action) {
  * Actions
  */
 export const Creators = {
-  addUser: user => ({
+  addUser: (user, position) => ({
     type: Types.ADD_USER,
-    payload: { user },
+    payload: { user, position },
   }),
   addUserSuccess: user => ({
     type: Types.ADD_USER_SUCCESS,
