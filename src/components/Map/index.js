@@ -20,7 +20,8 @@ class Map extends Component {
       longitude: -122.4376,
       zoom: 15,
     },
-    userPosition: null,
+    userPosition: [],
+    openModal: false,
   };
 
   componentDidMount() {
@@ -58,14 +59,20 @@ class Map extends Component {
     });
   };
 
+  closeModal = () => {
+    this.setState({ openModal: false, userPosition: '' });
+  };
+
   handleClick = (position) => {
-    this.setState({ userPosition: position.lngLat });
+    this.setState({ userPosition: position.lngLat, openModal: true });
   };
 
   render() {
     return (
       <Fragment>
-        {this.state.userPosition && <Modal userPosition={this.state.userPosition} />}
+        {this.state.openModal && (
+          <Modal userPosition={this.state.userPosition} closeModal={this.closeModal.bind(this)} />
+        )}
 
         <ReactMapGL
           {...this.state.viewport}

@@ -14,6 +14,10 @@ class Modal extends Component {
     this.props.addUser(input.value, this.props.userPosition);
   };
 
+  closeModal = () => {
+    this.props.closeModal();
+  };
+
   render() {
     return (
       <form onSubmit={this.handleSave} className="modal">
@@ -23,7 +27,7 @@ class Modal extends Component {
             <input placeholder="Github user" />
           </div>
           <div className="buttons">
-            <button type="button" className="btn-cancel">
+            <button type="button" className="btn-cancel" onClick={this.closeModal}>
               Cancel
             </button>
             <button type="button" className="btn-save" onClick={this.handleSave}>

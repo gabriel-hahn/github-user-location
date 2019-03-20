@@ -10,7 +10,7 @@ const User = ({ data }) => (
         <span className="description">{data.name}</span>
         <span className="login">{data.login}</span>
       </div>
-      <i className="fas fa-times-circle" />
+      <i className="fa fa-times-circle" aria-hidden="true" />
     </div>
   </Fragment>
 );

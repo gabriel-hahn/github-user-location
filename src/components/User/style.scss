@@ -33,7 +33,13 @@
     }
 
     i {
-        margin-top: 20px;
-        margin-left: 25px;
+        margin-top: 24px;
+        margin-left: 28px;
+        color: #f00;
+        cursor: pointer;
+
+        &:hover {
+            color: rgb(201, 4, 4);
+        }
     }
 }
