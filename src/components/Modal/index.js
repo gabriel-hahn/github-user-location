@@ -10,12 +10,15 @@ class Modal extends Component {
   handleSave = (e) => {
     e.preventDefault();
 
+    const { addUser, userPosition } = this.props;
+
     const input = document.getElementsByTagName('input')[0];
-    this.props.addUser(input.value, this.props.userPosition);
+    addUser(input.value, userPosition);
   };
 
   closeModal = () => {
-    this.props.closeModal();
+    const { closeModal } = this.props;
+    closeModal();
   };
 
   render() {

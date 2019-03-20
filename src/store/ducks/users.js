@@ -20,6 +20,13 @@ const INITIAL_STATE = {
       name: 'Gabriel Hahn Schaeffer',
       position: [-49.4060152740815, -28.699290962725723],
     },
+    {
+      login: 'gabriel',
+      id: 19672624,
+      avatar_url: 'https://avatars2.githubusercontent.com/u/19672684?v=4',
+      name: 'Gabriel',
+      position: [-49.4060152740815, -28.699290962725723],
+    },
   ],
 };
 
@@ -35,7 +42,10 @@ export default function users(state = INITIAL_STATE, action) {
     case Types.ADD_USER_FAILURE:
       return { ...state };
     case Types.REMOVE_USER:
-      return { ...state };
+      return {
+        ...state,
+        users: state.users.filter(user => user.id !== action.payload.id),
+      };
     default:
       return state;
   }
