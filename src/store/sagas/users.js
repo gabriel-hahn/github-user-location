@@ -8,16 +8,16 @@ export function* addUser(action) {
     const { data } = yield call(api.get, `/users/${action.payload.user}`);
 
     // Verify if user already exists
-    const isDuplicated = yield select(state => state.users.find(user => user.id === data.id));
+    const isDuplicated = yield select(state => state.users.users.find(user => user.id === data.id));
 
     if (isDuplicated) {
       yield put(UserActions.addUserFailure('User already exists in side menu'));
     } else {
       const userData = {
         id: data.id,
-        name: data.full_name,
-        description: data.description,
-        url: data.html_url,
+        name: data.name,
+        avatar_url: data.avatar_url,
+        login: data.login,
       };
 
       yield put(UserActions.addUserSuccess(userData));

@@ -12,7 +12,6 @@ export const Types = {
  * Reducers
  */
 const INITIAL_STATE = {
-  showModal: false,
   users: [
     {
       login: 'gabriel-hahn',
@@ -26,11 +25,14 @@ const INITIAL_STATE = {
 export default function users(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_USER:
-      return { ...state, showModal: true };
+      return { ...state };
     case Types.ADD_USER_SUCCESS:
-      return { ...state, showModal: false };
+      return {
+        ...state,
+        users: [...state.users, action.payload.user],
+      };
     case Types.ADD_USER_FAILURE:
-      return { ...state, showModal: false };
+      return { ...state };
     case Types.REMOVE_USER:
       return { ...state };
     default:
@@ -42,13 +44,13 @@ export default function users(state = INITIAL_STATE, action) {
  * Actions
  */
 export const Creators = {
-  addAddUser: data => ({
+  addUser: user => ({
     type: Types.ADD_USER,
-    payload: { data },
+    payload: { user },
   }),
-  addUserSuccess: data => ({
+  addUserSuccess: user => ({
     type: Types.ADD_USER_SUCCESS,
-    payload: { data },
+    payload: { user },
   }),
   addUserFailure: error => ({
     type: Types.ADD_USER_FAILURE,

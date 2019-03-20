@@ -1,8 +1,11 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import ReactMapGL from 'react-map-gl';
 import Modal from '../Modal';
+
+import { Creators as UserActions } from '../../store/ducks/users';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -17,6 +20,7 @@ class Map extends Component {
       longitude: -122.4376,
       zoom: 15,
     },
+    userPosition: null,
   };
 
   componentDidMount() {
@@ -55,13 +59,13 @@ class Map extends Component {
   };
 
   handleClick = (position) => {
-    console.log(position.lngLat);
+    this.setState({ userPosition: position.lngLat });
   };
 
   render() {
     return (
       <Fragment>
-        {this.props.data.showModal && <Modal />}
+        {this.state.userPosition && <Modal />}
 
         <ReactMapGL
           {...this.state.viewport}
@@ -79,4 +83,9 @@ const mapStateToProps = state => ({
   data: state.users,
 });
 
-export default connect(mapStateToProps)(Map);
+const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(Map);
