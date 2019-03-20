@@ -25,10 +25,12 @@ const INITIAL_STATE = {
 
 export default function users(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case Types.ADD_USER:
+      return { ...state, showModal: true };
     case Types.ADD_USER_SUCCESS:
-      return { ...state };
+      return { ...state, showModal: false };
     case Types.ADD_USER_FAILURE:
-      return { ...state };
+      return { ...state, showModal: false };
     case Types.REMOVE_USER:
       return { ...state };
     default:

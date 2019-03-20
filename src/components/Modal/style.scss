@@ -1,0 +1,77 @@
+.modal {
+    position: absolute;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    transition: all 0.8s;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+
+    .info {
+        background-color: #fff;
+        height: 10.5em;
+        width: 21em;
+        border-radius: 10px;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.4);
+
+        .user-name {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+
+            span {
+                display: flex;
+                justify-content: center;
+            }
+
+            input {
+                margin: 20px 25px;
+                width: 80%;
+                height: 35px;
+
+                font-size: 14px;
+                font-weight: 300;
+                padding-left: 10px;
+            }
+        }
+
+        .buttons {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+
+            .btn-cancel {
+                font-size: 15px;
+                width: 135px;
+                height: 37px;
+                color: #fff;
+                background-color: rgb(226, 226, 226);
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: rgb(209, 208, 208);
+                    transition: background-color 0.5s;
+                }
+            }
+
+            .btn-save {
+                font-size: 15px;
+                margin-left: 12px;
+                width: 135px;
+                height: 37px;
+                color: #fff;
+                background-color: rgb(120, 194, 136);
+                border-radius: 5px;
+
+                &:hover {
+                    background-color: rgb(106, 172, 120);
+                    transition: background-color 0.5s;
+                }
+            }
+        }
+    }
+}
