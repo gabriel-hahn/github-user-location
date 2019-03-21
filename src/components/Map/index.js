@@ -2,12 +2,10 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
-import ReactMapGL from 'react-map-gl';
+import MapGL, { Marker } from 'react-map-gl';
 import Modal from '../Modal';
 
 import { Creators as UserActions } from '../../store/ducks/users';
-
-import 'mapbox-gl/dist/mapbox-gl.css';
 
 const API_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -74,13 +72,27 @@ class Map extends Component {
           <Modal userPosition={this.state.userPosition} closeModal={this.closeModal.bind(this)} />
         )}
 
-        <ReactMapGL
+        <MapGL
           {...this.state.viewport}
           onClick={this.handleClick}
           mapStyle="mapbox://styles/mapbox/basic-v9"
           onViewportChange={viewport => this.setState({ viewport })}
           mapboxApiAccessToken={API_TOKEN}
-        />
+        >
+          {this.props.data.users.map(user => (
+            <Marker key={user.id} longitude={user.position[0]} latitude={user.position[1]}>
+              <img
+                style={{
+                  borderRadius: 100,
+                  width: 45,
+                  height: 45,
+                }}
+                alt={user.name}
+                src={user.avatar_url}
+              />
+            </Marker>
+          ))}
+        </MapGL>
       </Fragment>
     );
   }

@@ -4,7 +4,7 @@
     height: 100%;
     width: 100%;
     background-color: rgba(0, 0, 0, 0.6);
-    transition: all 0.8s;
+    animation: slide-up 0.3s ease;
 
     display: flex;
     align-items: center;
@@ -72,6 +72,15 @@
                     transition: background-color 0.5s;
                 }
             }
+        }
+    }
+
+    @keyframes slide-up {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
         }
     }
 }

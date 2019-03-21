@@ -12,6 +12,10 @@ class User extends Component {
     addRemoveUser(id);
   };
 
+  goToUser = (positionCoor) => {
+    console.log(positionCoor);
+  };
+
   render() {
     const { data } = this.props;
 
@@ -19,7 +23,7 @@ class User extends Component {
       <Fragment>
         <div className="user">
           <div className="info-box">
-            <img src={data.avatar_url} alt="User" />
+            <img src={data.avatar_url} alt="User" onClick={() => this.goToUser(data.position)} />
             <div className="info">
               <span className="description">{data.name}</span>
               <span className="login">{data.login}</span>
