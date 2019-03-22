@@ -1,12 +1,23 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import { Creators as UserActions } from '../../store/ducks/users';
 
 import './style.scss';
 
 class User extends Component {
+  static propTypes = {
+    addRemoveUser: PropTypes.func.isRequired,
+    data: PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      position: PropTypes.array,
+      avatar_url: PropTypes.string,
+    }).isRequired,
+  };
+
   deleteUser = (id) => {
     const { addRemoveUser } = this.props;
     addRemoveUser(id);

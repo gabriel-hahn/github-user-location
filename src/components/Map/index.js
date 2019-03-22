@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import MapGL, { Marker } from 'react-map-gl';
 import Modal from '../Modal';
@@ -10,6 +11,17 @@ import { Creators as UserActions } from '../../store/ducks/users';
 const API_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
 class Map extends Component {
+  static propTypes = {
+    data: PropTypes.shape({
+      users: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        position: PropTypes.array.isRequired,
+        name: PropTypes.string.isRequired,
+        avatar_url: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  };
+
   state = {
     viewport: {
       width: 400,
@@ -38,9 +50,11 @@ class Map extends Component {
   }
 
   setScreenPositon = (position) => {
+    const { viewport } = this.state;
+
     this.setState({
       viewport: {
-        ...this.state.viewport,
+        ...viewport,
         latitude: position.coords.latitude,
         longitude: position.coords.longitude,
       },
@@ -48,9 +62,11 @@ class Map extends Component {
   };
 
   resize = () => {
+    const { viewport } = this.state;
+
     this.setState({
       viewport: {
-        ...this.state.viewport,
+        ...viewport,
         width: window.innerWidth - 10,
         height: window.innerHeight - 10,
       },
@@ -66,20 +82,21 @@ class Map extends Component {
   };
 
   render() {
+    const { openModal, userPosition, viewport } = this.state;
+    const { data } = this.props;
+
     return (
       <Fragment>
-        {this.state.openModal && (
-          <Modal userPosition={this.state.userPosition} closeModal={this.closeModal.bind(this)} />
-        )}
+        {openModal && <Modal userPosition={userPosition} closeModal={this.closeModal} />}
 
         <MapGL
-          {...this.state.viewport}
+          {...viewport}
           onClick={this.handleClick}
           mapStyle="mapbox://styles/mapbox/basic-v9"
-          onViewportChange={viewport => this.setState({ viewport })}
+          onViewportChange={vp => this.setState({ viewport: vp })}
           mapboxApiAccessToken={API_TOKEN}
         >
-          {this.props.data.users.map(user => (
+          {data.users.map(user => (
             <Marker key={user.id} longitude={user.position[0]} latitude={user.position[1]}>
               <img
                 style={{

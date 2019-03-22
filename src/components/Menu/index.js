@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import User from '../User';
 
@@ -14,6 +15,14 @@ const Menu = ({ data }) => (
     </div>
   </Fragment>
 );
+
+Menu.propTypes = {
+  data: PropTypes.shape({
+    users: PropTypes.shape({
+      id: PropTypes.number.isRequired,
+    }),
+  }).isRequired,
+};
 
 const mapStateToProps = state => ({
   data: state.users,

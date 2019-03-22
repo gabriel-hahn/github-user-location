@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import PropTypes from 'prop-types';
 
 import { Creators as UserActions } from '../../store/ducks/users';
 
 import './style.scss';
 
 class Modal extends Component {
+  static propTypes = {
+    addUser: PropTypes.func.isRequired,
+    userPosition: PropTypes.func.isRequired,
+    closeModal: PropTypes.func.isRequired,
+  };
+
   handleSave = (e) => {
     e.preventDefault();
 
