@@ -18,9 +18,7 @@ const Menu = ({ data }) => (
 
 Menu.propTypes = {
   data: PropTypes.shape({
-    users: PropTypes.shape({
-      id: PropTypes.number.isRequired,
-    }),
+    users: PropTypes.array.isRequired,
   }).isRequired,
 };
 

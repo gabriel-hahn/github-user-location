@@ -13,12 +13,7 @@ const API_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 class Map extends Component {
   static propTypes = {
     data: PropTypes.shape({
-      users: PropTypes.shape({
-        id: PropTypes.number.isRequired,
-        position: PropTypes.array.isRequired,
-        name: PropTypes.string.isRequired,
-        avatar_url: PropTypes.string.isRequired,
-      }).isRequired,
+      users: PropTypes.array.isRequired,
     }).isRequired,
   };
 
