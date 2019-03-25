@@ -24,7 +24,8 @@ class User extends Component {
   };
 
   goToUser = (positionCoor) => {
-    console.log(positionCoor);
+    const { addSetViewport } = this.props;
+    addSetViewport({ latitude: positionCoor[1], longitude: positionCoor[0] });
   };
 
   render() {
