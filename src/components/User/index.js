@@ -34,7 +34,7 @@ class User extends Component {
       <Fragment>
         <div className="user">
           <div className="info-box">
-            <img src={data.avatar_url} alt="User" onClick={() => this.goToUser(data.position)} />
+            <img src={data.avatar_url} alt="User" />
             <div className="info">
               <span className="description">{data.name}</span>
               <span className="login">{data.login}</span>
@@ -46,7 +46,11 @@ class User extends Component {
               aria-hidden="true"
               onClick={() => this.deleteUser(data.id)}
             />
-            <i className="fa fa-arrow-right repos" aria-hidden="true" />
+            <i
+              className="fa fa-arrow-right repos"
+              onClick={() => this.goToUser(data.position)}
+              aria-hidden="true"
+            />
           </div>
         </div>
       </Fragment>

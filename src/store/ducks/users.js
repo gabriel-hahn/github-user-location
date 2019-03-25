@@ -21,22 +21,25 @@ const INITIAL_STATE = {
       position: [-49.4060152740815, -28.699290962725723],
     },
   ],
+  loading: false,
 };
 
 export default function users(state = INITIAL_STATE, action) {
   switch (action.type) {
     case Types.ADD_USER:
-      return { ...state };
+      return { ...state, loading: true };
     case Types.ADD_USER_SUCCESS:
       return {
         ...state,
         users: [...state.users, action.payload.user],
+        loading: false,
       };
     case Types.ADD_USER_FAILURE:
-      return { ...state };
+      return { ...state, loading: false };
     case Types.REMOVE_USER:
       return {
         ...state,
+        loading: false,
         users: state.users.filter(user => user.id !== action.payload.id),
       };
     default:

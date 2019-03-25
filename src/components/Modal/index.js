@@ -9,9 +9,12 @@ import './style.scss';
 
 class Modal extends Component {
   static propTypes = {
+    data: PropTypes.shape({
+      loading: PropTypes.bool.isRequired,
+    }).isRequired,
     addUser: PropTypes.func.isRequired,
-    userPosition: PropTypes.func.isRequired,
     closeModal: PropTypes.func.isRequired,
+    userPosition: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.number])).isRequired,
   };
 
   handleSave = (e) => {
@@ -29,6 +32,8 @@ class Modal extends Component {
   };
 
   render() {
+    const { data } = this.props;
+
     return (
       <form onSubmit={this.handleSave} className="modal">
         <div className="info">
@@ -41,7 +46,7 @@ class Modal extends Component {
               Cancel
             </button>
             <button type="button" className="btn-save" onClick={this.handleSave}>
-              Save
+              {data.loading ? <i className="fa fa-spinner fa-pulse" /> : 'Save'}
             </button>
           </div>
         </div>
