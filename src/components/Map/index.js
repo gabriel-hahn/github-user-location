@@ -18,13 +18,6 @@ class Map extends Component {
   };
 
   state = {
-    viewport: {
-      width: 400,
-      height: 400,
-      latitude: 37.7577,
-      longitude: -122.4376,
-      zoom: 15,
-    },
     userPosition: [],
     openModal: false,
   };
@@ -45,26 +38,22 @@ class Map extends Component {
   }
 
   setScreenPositon = (position) => {
-    const { viewport } = this.state;
+    const { addSetViewport, viewport } = this.props;
 
-    this.setState({
-      viewport: {
-        ...viewport,
-        latitude: position.coords.latitude,
-        longitude: position.coords.longitude,
-      },
+    addSetViewport({
+      ...viewport,
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
     });
   };
 
   resize = () => {
-    const { viewport } = this.state;
+    const { addSetViewportSize, viewport } = this.props;
 
-    this.setState({
-      viewport: {
-        ...viewport,
-        width: window.innerWidth - 10,
-        height: window.innerHeight - 10,
-      },
+    addSetViewportSize({
+      ...viewport,
+      width: window.innerWidth - 10,
+      height: window.innerHeight - 10,
     });
   };
 
@@ -77,18 +66,18 @@ class Map extends Component {
   };
 
   render() {
-    const { openModal, userPosition, viewport } = this.state;
-    const { data } = this.props;
+    const { openModal, userPosition } = this.state;
+    const { data, addSetViewport } = this.props;
 
     return (
       <Fragment>
         {openModal && <Modal userPosition={userPosition} closeModal={this.closeModal} />}
 
         <MapGL
-          {...viewport}
+          {...data.viewport}
           onClick={this.handleClick}
           mapStyle="mapbox://styles/mapbox/basic-v9"
-          onViewportChange={vp => this.setState({ viewport: vp })}
+          onViewportChange={vp => addSetViewport(vp)}
           mapboxApiAccessToken={API_TOKEN}
         >
           {data.users.map(user => (

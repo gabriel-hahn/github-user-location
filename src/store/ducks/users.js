@@ -6,6 +6,8 @@ export const Types = {
   ADD_USER_SUCCESS: 'users/ADD_USER_SUCCESS',
   ADD_USER_FAILURE: 'users/ADD_USER_FAILURE',
   REMOVE_USER: 'users/REMOVE_USER',
+  SET_VIEWPORT: 'users/SET_VIEWPORT',
+  SET_VIEWPORT_SIZE: 'users/SET_VIEWPORT_SIZE',
 };
 
 /**
@@ -22,6 +24,13 @@ const INITIAL_STATE = {
     },
   ],
   loading: false,
+  viewport: {
+    width: 400,
+    height: 400,
+    latitude: 37.7577,
+    longitude: -122.4376,
+    zoom: 15,
+  },
 };
 
 export default function users(state = INITIAL_STATE, action) {
@@ -41,6 +50,24 @@ export default function users(state = INITIAL_STATE, action) {
         ...state,
         loading: false,
         users: state.users.filter(user => user.id !== action.payload.id),
+      };
+    case Types.SET_VIEWPORT:
+      return {
+        ...state,
+        viewport: {
+          ...state.viewport,
+          latitude: action.payload.viewport.latitude,
+          longitude: action.payload.viewport.longitude,
+        },
+      };
+    case Types.SET_VIEWPORT_SIZE:
+      return {
+        ...state,
+        viewport: {
+          ...state.viewport,
+          height: action.payload.viewport.height,
+          width: action.payload.viewport.width,
+        },
       };
     default:
       return state;
@@ -66,5 +93,13 @@ export const Creators = {
   addRemoveUser: id => ({
     type: Types.REMOVE_USER,
     payload: { id },
+  }),
+  addSetViewport: viewport => ({
+    type: Types.SET_VIEWPORT,
+    payload: { viewport },
+  }),
+  addSetViewportSize: viewport => ({
+    type: Types.SET_VIEWPORT_SIZE,
+    payload: { viewport },
   }),
 };
