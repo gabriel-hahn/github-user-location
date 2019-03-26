@@ -7,6 +7,7 @@ import MapGL, { Marker } from 'react-map-gl';
 import Modal from '../Modal';
 
 import { Creators as UserActions } from '../../store/ducks/users';
+import { Creators as MapsActions } from '../../store/ducks/maps';
 
 const API_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN;
 
@@ -48,10 +49,10 @@ class Map extends Component {
   };
 
   resize = () => {
-    const { addSetViewportSize, viewport } = this.props;
+    const { addSetViewportSize, maps } = this.props;
 
     addSetViewportSize({
-      ...viewport,
+      ...maps.viewport,
       width: window.innerWidth - 10,
       height: window.innerHeight - 10,
     });
@@ -67,14 +68,14 @@ class Map extends Component {
 
   render() {
     const { openModal, userPosition } = this.state;
-    const { data, addSetViewport } = this.props;
+    const { data, maps, addSetViewport } = this.props;
 
     return (
       <Fragment>
         {openModal && <Modal userPosition={userPosition} closeModal={this.closeModal} />}
 
         <MapGL
-          {...data.viewport}
+          {...maps.viewport}
           onClick={this.handleClick}
           mapStyle="mapbox://styles/mapbox/basic-v9"
           onViewportChange={vp => addSetViewport(vp)}
@@ -101,9 +102,10 @@ class Map extends Component {
 
 const mapStateToProps = state => ({
   data: state.users,
+  maps: state.maps,
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...UserActions, ...MapsActions }, dispatch);
 
 export default connect(
   mapStateToProps,

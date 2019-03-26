@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 
 import { Creators as UserActions } from '../../store/ducks/users';
+import { Creators as MapsActions } from '../../store/ducks/maps';
 
 import './style.scss';
 
@@ -59,7 +60,7 @@ class User extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => bindActionCreators(UserActions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ ...UserActions, ...MapsActions }, dispatch);
 
 export default connect(
   null,
