@@ -32,6 +32,10 @@ Start the project:
 yarn start
 ``
 
+<p align="center">
+    <img src="https://media.giphy.com/media/TgIYtZ3DpSX00lMIYg/giphy.gif" alt="git-user-location" />
+</p>
+
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
