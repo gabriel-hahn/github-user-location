@@ -1,4 +1,5 @@
 import { call, put, select } from 'redux-saga/effects';
+import { Notification } from '../../utils/Notifications';
 import api from '../../services/api';
 
 import { Creators as UserActions } from '../ducks/users';
@@ -12,6 +13,7 @@ export function* addUser(action) {
 
     if (isDuplicated) {
       yield put(UserActions.addUserFailure('User already exists in side menu'));
+      Notification.userAlreadyExists();
     } else {
       const userData = {
         id: data.id,
@@ -22,10 +24,13 @@ export function* addUser(action) {
       };
 
       yield put(UserActions.addUserSuccess(userData));
+      Notification.success();
     }
   } catch (err) {
     yield put(
       UserActions.addUserFailure('Something wrong happened during get information of user'),
     );
+
+    Notification.somethingWrong();
   }
 }
